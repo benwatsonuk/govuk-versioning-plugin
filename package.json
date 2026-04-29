@@ -1,0 +1,43 @@
+{
+  "name": "@benwatsonuk/govuk-versioning-plugin",
+  "author": "BenWatsonUK",
+  "description": "A plugin to programmatically create new versions of an opinionated directory structure within the GOVUK prototype kit.",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "homepage": "https://github.com/benwatsonuk/govuk-versioning-plugin",
+  "bugs": {
+    "url": "https://github.com/benwatsonuk/govuk-versioning-plugin/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/benwatsonuk/govuk-versioning-plugin.git"
+  },
+  "scripts": {
+    "test": "mocha --require ts-node/register",
+    "clean": "rimraf dist",
+    "build": "npm run clean && tsc && cpx \"src/{assets,views}/**/*\" dist"
+  },
+  "dependencies": {
+    "ajv": "^8.17.1",
+    "express": "^4.18.2",
+    "nunjucks": "^3.2.4"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^25.0.8",
+    "chai": "^4.3.7",
+    "cpx": "^1.5.0",
+    "json-schema-to-typescript": "^15.0.4",
+    "mocha": "^10.2.0",
+    "nyc": "^15.1.0",
+    "rimraf": "^6.1.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  },
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  }
+}
