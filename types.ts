@@ -2,8 +2,8 @@ export type Version = {
   iteration: number;
   version: string;
   phase?: string;
-  notes?: string;
-  createdOn: Date;
+  notes?: string | null;
+  createdOn: string;
 }
 
 export type Config = {

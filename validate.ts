@@ -7,7 +7,7 @@ const ajv = new Ajv({ allErrors: true, strict: false })
 const validate = ajv.compile(schema)
 
 export function validateConfig(config: Config): Config {
-  if (!validate(config)) {
+  if (!validate({ mode: "config", config: config })) {
     const message = validate.errors
       ?.map(err => `${err.instancePath || "Config"} ${err.message}`)
       .join("\n")
@@ -21,7 +21,7 @@ export function validateConfig(config: Config): Config {
 }
 
 export function validateVersionsArray(versions: Versions): Versions {
-  if (!validate(versions)) {
+  if (!validate({ mode: "versions", versions: versions })) {
     const message = validate.errors
       ?.map(err => `${err.instancePath || "Versions"} ${err.message}`)
       .join("\n")
@@ -36,7 +36,7 @@ export function validateVersionsArray(versions: Versions): Versions {
 
 
 export function validateVersionToCreate(versionToCreate: VersionToCreate): VersionToCreate {
-  if (!validate(versionToCreate)) {
+  if (!validate({ mode: "versionToCreate", versionToCreate: versionToCreate })) {
     const message = validate.errors
       ?.map(err => `${err.instancePath || "VersionToCreate"} ${err.message}`)
       .join("\n")

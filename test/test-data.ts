@@ -1,0 +1,30 @@
+import { VersionToCreate, Versions, Config } from "../types";
+
+export const testData: { versions: Versions; versionToCreate: VersionToCreate; config: Config } = {
+  versions: [
+    {
+      iteration: 0,
+      version: "1.0.0",
+      createdOn: "2025-01-01T00:00:00Z",
+      phase: "private-beta",
+      notes: null
+    },
+    {
+      iteration: 1,
+      version: "1.1.0",
+      createdOn: "2025-012-02T00:00:00Z",
+      phase: "private-beta",
+      notes: null
+    }
+  ],
+  versionToCreate: {
+    version: "1.2.0",
+    phase: "private-beta",
+    config: {
+      itemsToClone: ["item1", "item2"]
+    }
+  },
+  config: {
+    itemsToClone: ["item1", "item2"]
+  }
+};
