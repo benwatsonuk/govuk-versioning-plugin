@@ -1,4 +1,4 @@
-import { VersionToCreate, Versions, Config } from "../types";
+import { VersionToCreate, Versions, Config } from "../src/types";
 
 export const testData: { versions: Versions; versionToCreate: VersionToCreate; config: Config } = {
   versions: [

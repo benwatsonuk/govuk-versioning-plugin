@@ -1,5 +1,5 @@
 const expect = require('chai').expect
-const validate = require('../validate.ts')
+const validate = require('../src/validate.ts')
 const { testData, badTestData } = require('./test-data.ts')
 const outputs = require('./outputs.ts')
 
