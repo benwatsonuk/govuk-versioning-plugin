@@ -30,12 +30,18 @@ async function createVersionToCreate({ config, versions }) {
     const notesAnswer = await (0, prompt_user_1.default)("Notes for this version (optional, press enter to skip): ");
     const nextNotes = notesAnswer.trim().length > 0
         ? notesAnswer.trim()
-        : null;
+        : undefined;
+    // --- VERSION NAME ---
+    const versionNameAnswer = await (0, prompt_user_1.default)("Version name (optional, press enter to skip): ");
+    const nextVersionName = versionNameAnswer.trim().length > 0
+        ? versionNameAnswer.trim()
+        : nextVersion + " (" + (nextPhase || "no phase") + ")";
     const versionToCreate = {
         newVersion: nextVersion,
         newPhase: nextPhase,
-        newVersionName: `${nextVersion} (${nextPhase})`,
+        newVersionName: nextVersionName,
         notes: nextNotes,
+        iteration: latestVersion.iteration + 1,
         oldVersion: config.version,
         oldPhase: config.phase,
         itemsToClone: config.itemsToClone,

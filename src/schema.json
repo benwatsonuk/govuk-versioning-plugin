@@ -59,11 +59,12 @@
         "mode": { "const": "versionToCreate" },
         "versionToCreate": {
           "type": "object",
-          "required": ["newVersion", "newPhase", "oldVersion", "oldPhase"],
+          "required": ["newVersion", "newPhase", "oldVersion", "oldPhase", "iteration"],
           "properties": {
             "newVersion": { "type": "string" },
             "newPhase": { "type": "string" },
             "newVersionName": { "type": "string" },
+            "iteration": { "type": "integer" },
             "notes": { "type": ["string", "null"] },
             "oldVersion": { "type": "string" },
             "oldPhase": { "type": "string" },

@@ -20,6 +20,9 @@ export const testData: { versions: Versions; versionToCreate: VersionToCreate; c
   versionToCreate: {
     newVersion: "1.2.0",
     newPhase: "private-beta",
+    iteration: 2,
+    newVersionName: "Version 1.2",
+    notes: "This is a test version.",
     oldVersion: "1.1.0",
     oldPhase: "private-beta",
     itemsToClone: [{"type": "file", "path": "item1.js"}, {"type": "directory", "path": "item2/"}],

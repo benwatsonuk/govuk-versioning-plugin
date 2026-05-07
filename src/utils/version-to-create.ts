@@ -1,3 +1,4 @@
+import { config } from "process";
 import { Config, Version, VersionToCreate } from "../types";
 import askQuestion from "./prompt-user";
 
@@ -13,7 +14,7 @@ export default async function createVersionToCreate({
   console.log("GOV.UK Versioning Plugin -- STARTED");
   
   const latestVersion = versions[versions.length - 1];
-
+  
   const currentPhase =
     latestVersion.phase ||
     config.phase ||
@@ -61,13 +62,24 @@ export default async function createVersionToCreate({
   const nextNotes =
     notesAnswer.trim().length > 0
       ? notesAnswer.trim()
-      : null;
+      : undefined;
+
+  // --- VERSION NAME ---
+  const versionNameAnswer = await askQuestion(
+    "Version name (optional, press enter to skip): "
+  );
+
+  const nextVersionName =
+    versionNameAnswer.trim().length > 0
+      ? versionNameAnswer.trim()
+      : nextVersion + " (" + (nextPhase || "no phase") + ")";
 
   const versionToCreate = {
     newVersion: nextVersion,
     newPhase: nextPhase,
-    newVersionName: `${nextVersion} (${nextPhase})`,
+    newVersionName: nextVersionName,
     notes: nextNotes,
+    iteration: latestVersion.iteration + 1,
     oldVersion: config.version,
     oldPhase: config.phase,
     itemsToClone: config.itemsToClone,

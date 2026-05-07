@@ -17,6 +17,7 @@ export type Config = {
 export type VersionToCreate = {
   newVersion: string;
   newPhase?: string;
+  iteration: number;
   newVersionName?: string;
   notes?: string | null;
   oldVersion: Config["version"];
