@@ -42,7 +42,7 @@
           "properties": {
             "iteration": { "type": "integer" },
             "version": { "type": "string" },
-            "createdOn": { "type": "string", "format": "date-time" },
+            "createdOn": { "type": "string" },
             "phase": { "type": "string" },
             "notes": { "type": ["string", "null"] },
             "additionalProperties": false
