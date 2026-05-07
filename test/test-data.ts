@@ -22,12 +22,12 @@ export const testData: { versions: Versions; versionToCreate: VersionToCreate; c
     phase: "private-beta",
     config: {
       version: "1.1.0",
-      itemsToClone: ["item1", "item2"]
+      itemsToClone: [{"type": "file", "path": "item1.js"}, {"type": "directory", "path": "item2/"}]
     }
   },
   config: {
     version: "1.1.0",
-    itemsToClone: ["item1", "item2"]
+    itemsToClone: [{"type": "file", "path": "item1.js"}, {"type": "directory", "path": "item2/"}]
   }
 };
 

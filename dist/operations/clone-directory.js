@@ -1,0 +1,20 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = cloneDirectory;
+const promises_1 = __importDefault(require("fs/promises"));
+const resolve_path_1 = __importDefault(require("../utils/resolve-path"));
+async function cloneDirectory(config) {
+    const source = (0, resolve_path_1.default)(config.from);
+    const target = (0, resolve_path_1.default)(config.to);
+    console.log(`Copying directory:
+${source}
+→
+${target}`);
+    await promises_1.default.cp(source, target, {
+        recursive: true
+    });
+    console.log("Directory copied");
+}
