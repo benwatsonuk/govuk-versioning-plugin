@@ -19,8 +19,6 @@ export default async function modifyFile(
     "utf8"
   );
 
-
-
   const find = interpolate(
     file.find,
     variables
