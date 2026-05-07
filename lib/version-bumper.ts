@@ -1,33 +1,34 @@
+import { VersionToCreate, Version } from "../types";
 const fs = require("fs").promises;
 const path = require("path");
 
-async function replaceInFiles(dir, replacements) {
-  const entries = await fs.readdir(dir, { withFileTypes: true });
+// async function replaceInFiles(dir, replacements) {
+//   const entries = await fs.readdir(dir, { withFileTypes: true });
 
-  for (const entry of entries) {
-    const fullPath = path.join(dir, entry.name);
+//   for (const entry of entries) {
+//     const fullPath = path.join(dir, entry.name);
 
-    if (entry.isDirectory()) {
-      await replaceInFiles(fullPath, replacements);
-      continue;
-    }
+//     if (entry.isDirectory()) {
+//       await replaceInFiles(fullPath, replacements);
+//       continue;
+//     }
 
-    let content = await fs.readFile(fullPath, "utf8");
+//     let content = await fs.readFile(fullPath, "utf8");
 
-    for (const [find, replace] of replacements) {
-      content = content.replace(find, replace);
-    }
+//     for (const [find, replace] of replacements) {
+//       content = content.replace(find, replace);
+//     }
 
-    await fs.writeFile(fullPath, content, "utf8");
-  }
-}
+//     await fs.writeFile(fullPath, content, "utf8");
+//   }
+// }
 
-async function bumpVersion(appName, fromVersion, toVersion) {
+async function bumpVersion(versionToCreate: VersionToCreate, fromVersion: Version, toVersion: Version) {
   const viewsBase = path.join(
-    process.cwd(),
+    // process.cwd(),
     "app",
     "views",
-    appName
+    // appName
   );
 
   const sourceDir = path.join(viewsBase, fromVersion);
@@ -56,7 +57,7 @@ async function bumpVersion(appName, fromVersion, toVersion) {
     ]
   ];
 
-  await replaceInFiles(targetDir, replacements);
+  // await replaceInFiles(targetDir, replacements);
 
   console.log(`Created ${toVersion} from ${fromVersion}`);
 }

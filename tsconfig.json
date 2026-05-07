@@ -1,5 +1,5 @@
 {
-  "include": ["*.ts", "lib/**/*.js", "index.js"],
+  "include": ["index.ts", "scripts/**/*", "lib/**/*", "validate.ts", "types.ts"],
   "compilerOptions": {
     "target": "ES2019",
     "module": "NodeNext",
