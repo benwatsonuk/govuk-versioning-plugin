@@ -1,50 +1,50 @@
 import Ajv from "ajv"
 import schema from "./schema.json"
-import { PageFlowArray, PagesArray, StagesArray } from "./types"
+import { Config, Versions, VersionToCreate } from "./types"
 
 const ajv = new Ajv({ allErrors: true, strict: false })
 
 const validate = ajv.compile(schema)
 
-export function validatePagesArray(pages: unknown): PagesArray {
-  if (!validate({ mode: "pages", pages: pages })) {
+export function validateConfig(config: Config): Config {
+  if (!validate(config)) {
     const message = validate.errors
-      ?.map(err => `${err.instancePath || "Pages"} ${err.message}`)
+      ?.map(err => `${err.instancePath || "Config"} ${err.message}`)
       .join("\n")
 
     throw new Error(
-      `Invalid array of PAGES passed to govuk-pages-plugin - please check the documentation to ensure the JSON schema you are passing matches what is expected:\n${message}`
+      `Invalid config passed to govuk-versioning-plugin - please check the documentation to ensure the JSON schema you are passing matches what is expected:\n${message}`
     )
   }
 
-  return pages as PagesArray
+  return config as Config
 }
 
-export function validateStagesArray(stages: unknown): StagesArray {
-  if (!validate({ mode: "stages", stages: stages })) {
+export function validateVersionsArray(versions: Versions): Versions {
+  if (!validate(versions)) {
     const message = validate.errors
-      ?.map(err => `${err.instancePath || "Stages"} ${err.message}`)
+      ?.map(err => `${err.instancePath || "Versions"} ${err.message}`)
       .join("\n")
 
     throw new Error(
-      `Invalid array of STAGES passed to govuk-pages-plugin - please check the documentation to ensure the JSON schema you are passing matches what is expected:\n${message}`
+      `Invalid array of VERSIONS passed to govuk-versioning-plugin - please check the documentation to ensure the JSON schema you are passing matches what is expected:\n${message}`
     )
   }
 
-  return stages as StagesArray
+  return versions as Versions
 }
 
 
-export function validatePageFlowArray(flows: PageFlowArray): PageFlowArray {
-  if (!validate({ mode: "flows", flows: flows})) {
+export function validateVersionToCreate(versionToCreate: VersionToCreate): VersionToCreate {
+  if (!validate(versionToCreate)) {
     const message = validate.errors
-      ?.map(err => `${err.instancePath || "Flows"} ${err.message}`)
+      ?.map(err => `${err.instancePath || "VersionToCreate"} ${err.message}`)
       .join("\n")
 
     throw new Error(
-      `Invalid array of FLOWS passed to govuk-pages-plugin - please check the documentation to ensure the JSON schema you are passing matches what is expected:\n${message}`
+      `Invalid VersionToCreate passed to govuk-versioning-plugin - please check the documentation to ensure the JSON schema you are passing matches what is expected:\n${message}`
     )
   }
 
-  return flows as PageFlowArray
+  return versionToCreate as VersionToCreate
 }

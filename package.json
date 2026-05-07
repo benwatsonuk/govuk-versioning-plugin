@@ -15,8 +15,6 @@
   },
   "scripts": {
     "test": "mocha --require ts-node/register",
-    "clean": "rimraf dist",
-    "build": "npm run clean && tsc && cpx \"templates/**/*\" dist/views",
     "bump-version": "node scripts/bump-version.js"
   },
   "dependencies": {

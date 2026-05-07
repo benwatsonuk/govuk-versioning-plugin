@@ -5,144 +5,87 @@
   "properties": {
     "mode": {
       "type": "string",
-      "enum": ["pages", "stages", "flows"]
+      "enum": ["versions", "versionToCreate", "config"]
     }
   },
-  "allOf": [
+   "allOf": [
     {
       "if": {
-        "properties": { "mode": { "const": "pages" } }
+        "properties": { "mode": { "const": "versions" } }
       },
-      "then": { "$ref": "#/definitions/pages" }
+      "then": { "$ref": "#/definitions/versions" }
     },
     {
       "if": {
-        "properties": { "mode": { "const": "stages" } }
+        "properties": { "mode": { "const": "versionToCreate" } }
       },
-      "then": { "$ref": "#/definitions/stages" }
+      "then": { "$ref": "#/definitions/versionToCreate" }
     },
     {
       "if": {
-        "properties": { "mode": { "const": "flows" } }
+        "properties": { "mode": { "const": "config" } }
       },
-      "then": { "$ref": "#/definitions/flows" }
+      "then": { "$ref": "#/definitions/config" }
     }
   ],
   "definitions": {
-    "pages": {
+    "versions": {
       "type": "object",
-      "required": ["mode", "pages"],
+      "required": ["mode", "versions"],
       "properties": {
-        "mode": { "const": "pages" },
-        "pages": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "required": ["id", "title", "route"],
-            "properties": {
-              "id": { "type": "integer" },
-              "title": { "type": "string" },
-              "route": { "type": "string" },
-              "type": { "type": ["string", "null"] },
-              "stage": {
-                "type": ["object"],
-                "properties": {
-                  "main": { "type": ["string"] },
-                  "subStage": { "type": ["integer", "string"] }
-                },
-                "additionalProperties": false
-              },
-              "description": { "type": ["string", "null"] },
-              "newPage": { "type": ["boolean", "null"] },
-              "iterations": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "required": ["phase", "version"],
-                  "properties": {
-                    "phase": { "type": "string" },
-                    "version": { "type": ["integer"] },
-                    "notes": { "type": ["string", "null"] } 
-                  },
-                  "additionalProperties": false
-                }
-              }
-            },
-            "additionalProperties": true
+        "mode": { "const": "versions" },
+        "versions": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": ["iteration", "version", "createdOn"],
+          "properties": {
+            "iteration": { "type": "integer" },
+            "version": { "type": "string" },
+            "createdOn": { "type": "string", "format": "date-time" },
+            "phase": { "type": "string" },
+            "notes": { "type": ["string", "null"] },
+            "additionalProperties": false
+            }
           }
         }
       },
       "additionalProperties": false
     },
-    "stages": {
+    "versionToCreate": {
       "type": "object",
-      "required": ["mode", "stages"],
+      "required": ["mode", "versionToCreate"],
       "properties": {
-        "mode": { "const": "stages" },
-        "stages": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "required": ["id", "title", "route"],
-            "properties": {
-              "id": { "type": "string" },
-              "title": { "type": "string" },
-              "route": { "type": "string" },
-              "description": { "type": ["string", "null"] },
-              "subStages": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "required": ["id", "title"],
-                  "properties": {
-                    "id": { "type": ["string", "integer"] },
-                    "title": { "type": "string" },
-                    "route": { "type": "string" },
-                    "description": { "type": ["string", "null"] }
-                  },
-                  "additionalProperties": true
-                }
-              }
-            },
-            "additionalProperties": true
+        "mode": { "const": "versionToCreate" },
+        "versionToCreate": {
+          "type": "object",
+          "required": ["version", "phase", "config"],
+          "properties": {
+            "version": { "type": "string" },
+            "phase": { "type": "string" },
+            "config": { "type": "object" }
           }
         }
       },
       "additionalProperties": false
     },
-    "flows": {
+    "config": {
       "type": "object",
-      "required": ["mode", "flows"],
+      "required": ["mode", "config"],
       "properties": {
-        "mode": { "const": "flows" },
-        "flows": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "required": ["id", "title", "steps"],
-            "properties": {
-              "id": { "type": "integer" },
-              "title": { "type": "string" },
-              "description": { "type": "string" },
-              "user": { "type": "string" },
-              "steps": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "required": ["pageId"],
-                  "properties": {
-                    "pageId": { "type": ["integer"] }
-                  },
-                  "additionalProperties": false
-                },
-                "additionalProperties": false
-              }
-            },
-            "additionalProperties": true
+        "mode": { "const": "config" },
+        "config": { 
+          "type": "object",
+          "required": ["itemsToClone"],
+          "properties": {
+            "itemsToClone": {
+              "type": "array",
+              "items": { "type": "string" }
+            }
           }
-        }
-      },
+        },
       "additionalProperties": false
+      }
     }
   }
 }
