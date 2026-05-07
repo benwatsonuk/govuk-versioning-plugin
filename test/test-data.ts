@@ -28,3 +28,31 @@ export const testData: { versions: Versions; versionToCreate: VersionToCreate; c
     itemsToClone: ["item1", "item2"]
   }
 };
+
+export const badTestData = {
+  versions: [
+    {
+      iteration: 'blue',
+      version: "1.0.0",
+      createdOn: "2025-01-01T00:00:00Z",
+      phase: "private-beta",
+      notes: null
+    },
+    {
+      iteration: 'green',
+      version: "1.1.0",
+      createdOn: "2025-012-02T00:00:00Z",
+      phase: "private-beta",
+      notes: null
+    }
+  ],
+  versionToCreate: {
+    phase: "private-beta",
+    config: {
+      itemsToClone: ["item1", "item2"]
+    }
+  },
+  config: {
+    
+  }
+};
