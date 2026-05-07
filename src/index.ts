@@ -1,14 +1,19 @@
 import run from "./runner";
-import { VersionToCreate, Config } from "./types";
-import { validateVersionToCreate, validateConfig } from "./validate";
+import { Config, Versions } from "./types";
+import createVersionToCreate from "./utils/version-to-create";
+import { validateVersionToCreate, validateConfig, validateVersionsArray } from "./validate";
 
-export default function plugin(config: Config, versionToCreate: VersionToCreate) {
+export default function plugin(config: Config, versions: Versions) {
     const validatedConfig = validateConfig(config);
-    const validatedVersionToCreate = validateVersionToCreate(versionToCreate);
+    const validatedVersions = validateVersionsArray(versions);
+    const versionToCreatePromise = createVersionToCreate({config: validatedConfig, versions: validatedVersions});
+    const validatedVersionToCreatePromise = versionToCreatePromise.then(validateVersionToCreate);
 
     return {
         run: async () => {
-        await run(validatedConfig, validatedVersionToCreate);
+            const validatedVersionToCreate = await validatedVersionToCreatePromise;
+            await run(validatedVersionToCreate);
+            console.log("GOV.UK Versioning Plugin -- COMPLETE");
         }
     };
 }

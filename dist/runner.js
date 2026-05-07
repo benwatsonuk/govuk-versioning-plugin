@@ -1,8 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = run;
-async function run(config, versionToCreate) {
-    console.log("GOV.UK Versioning Plugin -- STARTED");
+async function run(versionToCreate) {
     // for (const dir of config.cloneDirectories || []) {
     //   await cloneDirectory(dir);
     // }
@@ -12,5 +11,4 @@ async function run(config, versionToCreate) {
     // for (const file of config.modifyFiles || []) {
     //   await modifyFile(file);
     // }
-    console.log("GOV.UK Versioning Plugin -- COMPLETE");
 }
