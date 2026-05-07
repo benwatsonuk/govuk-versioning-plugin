@@ -34,7 +34,15 @@ export type ItemToClone = {
 export type ItemToUpdate = {
   path: string;
   find: string;
-  add: string;
+  type: "add" | "replace";
+  value: string;
+}
+
+export type ModifyFileVariables = {
+  newVersion: string;
+  newPhase?: string;
+  oldVersion: string;
+  oldPhase?: string;
 }
 
 export type Versions = Version[];

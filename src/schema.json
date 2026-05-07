@@ -83,11 +83,12 @@
               "type": "array",
               "items": {
                 "type": "object",
-                "required": ["path", "find", "add"],
+                "required": ["path", "type", "value", "find"],
                 "properties": {
                   "path": { "type": "string" },
                   "find": { "type": "string" },
-                  "add": { "type": "string" }
+                  "type": { "type": "string", "enum": ["add", "replace"] },
+                  "value": { "type": "string" }
                 }
               }
             }

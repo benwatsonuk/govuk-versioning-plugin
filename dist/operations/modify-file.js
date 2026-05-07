@@ -6,12 +6,22 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = modifyFile;
 const promises_1 = __importDefault(require("fs/promises"));
 const resolve_path_1 = __importDefault(require("../utils/resolve-path"));
-async function modifyFile(config) {
-    const targetFile = (0, resolve_path_1.default)(config.file);
-    let content = await promises_1.default.readFile(targetFile, "utf8");
-    for (const replacement of config.replacements) {
-        content = content.replace(new RegExp(replacement.find, "g"), replacement.replace);
+const interpolate_1 = __importDefault(require("../utils/interpolate"));
+async function modifyFile(file, variables) {
+    const path = (0, interpolate_1.default)(file.path, variables);
+    const filePath = (0, resolve_path_1.default)(path);
+    let content = await promises_1.default.readFile(filePath, "utf8");
+    const find = (0, interpolate_1.default)(file.find, variables);
+    const value = (0, interpolate_1.default)(file.value, variables);
+    if (!content.includes(find)) {
+        throw new Error(`Could not find target string in ${file.path}`);
     }
-    await promises_1.default.writeFile(targetFile, content, "utf8");
-    console.log(`Modified ${config.file}`);
+    if (file.type === "replace") {
+        content = content.replace(find, value);
+    }
+    if (file.type === "add") {
+        content = content.replace(find, `${find}\n${value}`);
+    }
+    await promises_1.default.writeFile(filePath, content, "utf8");
+    console.log(`Updated ${file.path}`);
 }

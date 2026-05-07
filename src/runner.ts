@@ -2,6 +2,7 @@ import { VersionToCreate } from "./types";
 import cloneFile from "./operations/clone-file";
 import cloneDirectory from "./operations/clone-directory";
 import modifyFile from "./operations/modify-file";
+import createVariables from "./utils/create-variables";
 
 export default async function run(
   versionToCreate: VersionToCreate
@@ -19,8 +20,10 @@ export default async function run(
     }
   }
 
-  // for (const file of config.modifyFiles || []) {
-  //   await modifyFile(file);
-  // }
+  const variables = createVariables(versionToCreate);
+  console.log(variables)
+  for (const file of versionToCreate.itemsToUpdate || []) {
+    await modifyFile(file, variables);
+  }
 
 }

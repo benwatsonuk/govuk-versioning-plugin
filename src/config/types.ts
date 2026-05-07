@@ -16,6 +16,8 @@ export interface Replacement {
 }
 
 export interface ModifyFile {
-  file: string;
-  replacements: Replacement[];
+  path: string;
+  type: "add"| "replace";
+  find: string;
+  value: string;
 }

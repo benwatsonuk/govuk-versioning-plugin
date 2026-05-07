@@ -5,6 +5,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = run;
 const clone_file_1 = __importDefault(require("./operations/clone-file"));
+const modify_file_1 = __importDefault(require("./operations/modify-file"));
+const create_variables_1 = __importDefault(require("./utils/create-variables"));
 async function run(versionToCreate) {
     // for (const dir of config.cloneDirectories || []) {
     //   await cloneDirectory(dir);
@@ -17,7 +19,9 @@ async function run(versionToCreate) {
             // await cloneDirectory(item);
         }
     }
-    // for (const file of config.modifyFiles || []) {
-    //   await modifyFile(file);
-    // }
+    const variables = (0, create_variables_1.default)(versionToCreate);
+    console.log(variables);
+    for (const file of versionToCreate.itemsToUpdate || []) {
+        await (0, modify_file_1.default)(file, variables);
+    }
 }
