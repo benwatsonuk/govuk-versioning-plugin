@@ -1,11 +1,13 @@
+import { VersionToCreate } from "../types";
+
 export interface CloneDirectory {
-  from: string;
-  to: string;
+  path: string;
+  versionToCreate: VersionToCreate;
 }
 
 export interface CloneFile {
-  from: string;
-  to: string;
+  path: string;
+  versionToCreate: VersionToCreate;
 }
 
 export interface Replacement {

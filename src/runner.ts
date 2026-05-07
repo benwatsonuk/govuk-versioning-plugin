@@ -11,9 +11,13 @@ export default async function run(
   //   await cloneDirectory(dir);
   // }
 
-  // for (const file of config.cloneFiles || []) {
-  //   await cloneFile(file);
-  // }
+  for (const item of versionToCreate.itemsToClone || []) {
+    if (item.type === "file") {
+      await cloneFile({ path: item.path, versionToCreate });
+    } else if (item.type === "directory") {
+      // await cloneDirectory(item);
+    }
+  }
 
   // for (const file of config.modifyFiles || []) {
   //   await modifyFile(file);
