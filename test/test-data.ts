@@ -21,10 +21,12 @@ export const testData: { versions: Versions; versionToCreate: VersionToCreate; c
     version: "1.2.0",
     phase: "private-beta",
     config: {
+      version: "1.1.0",
       itemsToClone: ["item1", "item2"]
     }
   },
   config: {
+    version: "1.1.0",
     itemsToClone: ["item1", "item2"]
   }
 };
