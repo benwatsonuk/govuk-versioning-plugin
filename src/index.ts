@@ -12,7 +12,7 @@ export default function plugin(config: Config, versions: Versions) {
     return {
         run: async () => {
             const validatedVersionToCreate = await validatedVersionToCreatePromise;
-            await run(validatedVersionToCreate);
+            await run(validatedVersionToCreate, versions, config);
             console.log("GOV.UK Versioning Plugin -- COMPLETE");
         }
     };

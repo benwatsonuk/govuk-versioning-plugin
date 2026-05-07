@@ -46,3 +46,8 @@ export type ModifyFileVariables = {
 }
 
 export type Versions = Version[];
+
+export type VersioningPluginConfig = {
+  versions: Versions;
+  config: Config;
+}

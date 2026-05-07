@@ -15,7 +15,7 @@ function plugin(config, versions) {
     return {
         run: async () => {
             const validatedVersionToCreate = await validatedVersionToCreatePromise;
-            await (0, runner_1.default)(validatedVersionToCreate);
+            await (0, runner_1.default)(validatedVersionToCreate, versions, config);
             console.log("GOV.UK Versioning Plugin -- COMPLETE");
         }
     };
