@@ -3,8 +3,7 @@
   "author": "BenWatsonUK",
   "description": "A plugin to programmatically create new versions of an opinionated directory structure within the GOVUK prototype kit.",
   "version": "1.0.0",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "index.js",
   "homepage": "https://github.com/benwatsonuk/govuk-versioning-plugin",
   "bugs": {
     "url": "https://github.com/benwatsonuk/govuk-versioning-plugin/issues"
