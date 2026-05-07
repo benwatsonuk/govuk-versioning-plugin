@@ -32,12 +32,14 @@ async function createVersionToCreate({ config, versions }) {
         ? notesAnswer.trim()
         : null;
     const versionToCreate = {
-        version: nextVersion,
-        phase: nextPhase,
+        newVersion: nextVersion,
+        newPhase: nextPhase,
+        newVersionName: `${nextVersion} (${nextPhase})`,
         notes: nextNotes,
-        config: {
-            ...config,
-        }
+        oldVersion: config.version,
+        oldPhase: config.phase,
+        itemsToClone: config.itemsToClone,
+        itemsToUpdate: config.itemsToUpdate
     };
     console.log("\nGenerated versionToCreate:");
     console.log(versionToCreate);

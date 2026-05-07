@@ -59,11 +59,37 @@
         "mode": { "const": "versionToCreate" },
         "versionToCreate": {
           "type": "object",
-          "required": ["version", "phase", "config"],
+          "required": ["newVersion", "newPhase", "oldVersion", "oldPhase"],
           "properties": {
-            "version": { "type": "string" },
-            "phase": { "type": "string" },
-            "config": { "type": "object" }
+            "newVersion": { "type": "string" },
+            "newPhase": { "type": "string" },
+            "newVersionName": { "type": "string" },
+            "notes": { "type": ["string", "null"] },
+            "oldVersion": { "type": "string" },
+            "oldPhase": { "type": "string" },
+            "itemsToClone": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["type", "path"],
+                "properties": {
+                  "type": { "type": "string", "enum": ["file", "directory"] },
+                  "path": { "type": "string" }
+                }
+              }
+            },
+            "itemsToUpdate": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["path", "find", "add"],
+                "properties": {
+                  "path": { "type": "string" },
+                  "find": { "type": "string" },
+                  "add": { "type": "string" }
+                }
+              }
+            }
           }
         }
       },

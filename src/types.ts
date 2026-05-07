@@ -15,9 +15,14 @@ export type Config = {
 }
 
 export type VersionToCreate = {
-    version: string;
-    phase?: string;
-    config: Config;
+  newVersion: string;
+  newPhase?: string;
+  newVersionName?: string;
+  notes?: string | null;
+  oldVersion: Config["version"];
+  oldPhase?: Config["phase"];
+  itemsToClone: Config["itemsToClone"];
+  itemsToUpdate?: Config["itemsToUpdate"];
 }
 
 export type ItemToClone = {
@@ -26,7 +31,7 @@ export type ItemToClone = {
 }
 
 export type ItemToUpdate = {
-  file: string;
+  path: string;
   find: string;
   add: string;
 }

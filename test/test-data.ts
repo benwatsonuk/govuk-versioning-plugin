@@ -18,12 +18,12 @@ export const testData: { versions: Versions; versionToCreate: VersionToCreate; c
     }
   ],
   versionToCreate: {
-    version: "1.2.0",
-    phase: "private-beta",
-    config: {
-      version: "1.1.0",
-      itemsToClone: [{"type": "file", "path": "item1.js"}, {"type": "directory", "path": "item2/"}]
-    }
+    newVersion: "1.2.0",
+    newPhase: "private-beta",
+    oldVersion: "1.1.0",
+    oldPhase: "private-beta",
+    itemsToClone: [{"type": "file", "path": "item1.js"}, {"type": "directory", "path": "item2/"}],
+    itemsToUpdate: [{path: 'item3.js', find: 'old text', add: 'new text'}]
   },
   config: {
     version: "1.1.0",
