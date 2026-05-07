@@ -7,20 +7,27 @@ exports.default = modifyFile;
 const promises_1 = __importDefault(require("fs/promises"));
 const resolve_path_1 = __importDefault(require("../utils/resolve-path"));
 const interpolate_1 = __importDefault(require("../utils/interpolate"));
+function escapeRegExp(value) {
+    return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
 async function modifyFile(file, variables) {
     const path = (0, interpolate_1.default)(file.path, variables);
     const filePath = (0, resolve_path_1.default)(path);
     let content = await promises_1.default.readFile(filePath, "utf8");
     const find = (0, interpolate_1.default)(file.find, variables);
     const value = (0, interpolate_1.default)(file.value, variables);
-    if (!content.includes(find)) {
-        throw new Error(`Could not find target string in ${file.path}`);
+    // Use regex with global flag so ALL matches are handled
+    const findRegex = new RegExp(escapeRegExp(find), "g");
+    // Gracefully handle missing target string
+    if (!findRegex.test(content)) {
+        console.warn(`[Version Plugin] Skipped: could not find target string in ${file.path}`);
+        return;
     }
     if (file.type === "replace") {
-        content = content.replace(find, value);
+        content = content.replace(findRegex, value);
     }
     if (file.type === "add") {
-        content = content.replace(find, `${find}\n${value}`);
+        content = content.replace(findRegex, `${find}\n${value}`);
     }
     await promises_1.default.writeFile(filePath, content, "utf8");
     console.log(`Updated ${file.path}`);

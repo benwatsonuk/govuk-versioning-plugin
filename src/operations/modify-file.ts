@@ -3,6 +3,13 @@ import resolvePath from "../utils/resolve-path";
 import { ModifyFile } from "../config/types";
 import interpolate from "../utils/interpolate";
 
+function escapeRegExp(value: string): string {
+  return value.replace(
+    /[.*+?^${}()|[\]\\]/g,
+    "\\$&"
+  );
+}
+
 export default async function modifyFile(
   file: ModifyFile,
   variables: Record<string, string>
@@ -29,19 +36,28 @@ export default async function modifyFile(
     variables
   );
 
-  if (!content.includes(find)) {
-    throw new Error(
-      `Could not find target string in ${file.path}`
+// Use regex with global flag so ALL matches are handled
+  const findRegex = new RegExp(
+    escapeRegExp(find),
+    "g"
+  );
+
+  // Gracefully handle missing target string
+  if (!findRegex.test(content)) {
+    console.warn(
+      `[Version Plugin] Skipped: could not find target string in ${file.path}`
     );
+
+    return;
   }
 
   if (file.type === "replace") {
-    content = content.replace(find, value);
+    content = content.replace(findRegex, value);
   }
 
   if (file.type === "add") {
     content = content.replace(
-      find,
+      findRegex,
       `${find}\n${value}`
     );
   }
