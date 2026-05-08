@@ -1,5 +1,6 @@
 import run from "./runner";
 import { Config, Versions } from "./types";
+import resolvePath from "./utils/resolve-path";
 import createVersionToCreate from "./utils/version-to-create";
 import { validateVersionToCreate, validateConfig, validateVersionsArray } from "./validate";
 
@@ -17,3 +18,7 @@ export default function plugin(config: Config, versions: Versions) {
         }
     };
 }
+
+export const viewsPath = resolvePath(
+  "../app/views"
+);

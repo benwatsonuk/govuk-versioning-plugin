@@ -1,0 +1,13 @@
+{% if params.type === 'accordion' %}
+
+    {% include './includes/accordion.njk' %}
+
+{% elseif params.type === 'table' %}
+
+    {% include './includes/table.njk' %}
+
+{% else %}
+
+    {% include './includes/list.njk' %}
+
+{% endif %}

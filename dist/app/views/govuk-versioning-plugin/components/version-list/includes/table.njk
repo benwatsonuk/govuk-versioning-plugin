@@ -1,0 +1,39 @@
+{% from "govuk/components/table/macro.njk" import govukTable %}
+
+{% set items = [] %}
+{% for version in params.versions | reverse %}
+{% set versionTitle = version.version %}
+{% if version.name %}
+    {% set versionTitle = version.name + " (<span style='text-transform: uppercase'>" + version.version + "</span>)" %}
+{% endif %}
+    {% set item = [{
+        html: versionTitle | safe
+      },
+      {
+        html: "<span class='govuk-tag'>" + version.phase + "</span>"
+      },
+      {
+        html: '<a href="">View version</a>'
+      }]
+      %}
+    {% set items = (items.push(item), items) %}
+{% endfor %}
+
+{{ govukTable({
+  caption: "Design iterations",
+  captionClasses: "govuk-table__caption--m",
+  firstCellIsHeader: true,
+  head: [
+    {
+      text: "Version"
+    },
+    {
+      text: "Phase"
+    },
+    {
+        text: "Link"
+    }
+  ],
+  rows: items
+})
+}}

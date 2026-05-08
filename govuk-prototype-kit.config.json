@@ -1,5 +1,6 @@
 {
 	"meta": {
 		"description": "This plugin provides the ability to programmatically create new versions of an opinionated directory structure within the GOVUK prototype kit."
-	}
+	},
+	"nunjucksPaths": ["/dist/app/views"]
 }
