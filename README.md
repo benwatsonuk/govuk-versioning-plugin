@@ -23,29 +23,34 @@ Or take a look at the sample file and copy and paste this... https://github.com/
 
 This is an array of current versions, each version must have the following structure:
 
-```export type Version = {
+```
+export type Version = {
   iteration: number;
   version: string;
   phase?: string;
   name?: string;
   notes?: string | null;
   createdOn: string;
-}```
+}
+```
 
 ### Config object
 
 This in an object with the following structure:
 
-```export type Config = {
+```
+export type Config = {
   phase?: string;
   version: string;
   itemsToClone: ItemToClone[];
   itemsToUpdate?: ItemToUpdate[];
-}```
+}
+```
 
 For reference, here are the objects for the `itemsToClone` and `itemsToUpdate` arrays:
 
-```export type ItemToClone = {
+```
+export type ItemToClone = {
   type: "file" | "directory";
   path: string;
 }
@@ -55,7 +60,8 @@ export type ItemToUpdate = {
   find: string;
   type: "add" | "replace";
   value: string;
-}```
+}
+```
 
 The `phase` and `version` are the current/most recent versions and phase and this is automatically updated by the plugin after setup.
 
@@ -65,7 +71,8 @@ The `phase` and `version` are the current/most recent versions and phase and thi
 
 Here is an example of the full file (version.js):
 
-```// This file is used by the govuk-versioning-plugin
+```
+// This file is used by the govuk-versioning-plugin
 // Do not delete or modify this file unless you know what you are doing! Read the plugin's ReadMe for more information
 
 export const versions = [
