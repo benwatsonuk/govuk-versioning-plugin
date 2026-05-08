@@ -2,12 +2,16 @@
 
 <ul class="govuk-list govuk-list--bullet">
   {% for version in params.versions | reverse %}
+      {% set href = params.hrefPrefix
+      | replace('${phase}', version.phase or '')
+      | replace('${version}', version.version or '')
+    %}
   {% set versionTitle = version.version %}
   {% if version.name %}
       {% set versionTitle = version.name + " (<span style='text-transform: uppercase'>" + version.version + "</span>)" %}
   {% endif %}
     <li>
-      <a href=""><strong>{{ versionTitle | safe }}</strong></a>
+      <a href="{{ href }}"><strong>{{ versionTitle | safe }}</strong></a>
 
       {% if version.notes %}
         <br>

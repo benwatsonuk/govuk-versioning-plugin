@@ -161,3 +161,26 @@ The plugin will validate the `versions.js` file before anything is executed.
 Then you will be prompted to enter a number of values, the plugin will make suggestions which you can except or alter.
 
 That's it... once it is running, it should save you some time when bumping prototype versions.
+
+
+# Using the components to dynamicallty display an index
+
+You can use a provided component to display the versions for example on the protoype index page. The index component has three flavours, `list`, `table` and `accordion`.
+
+The `hrefPrefix` informs the component of the path to use for links.
+
+`versions` must provide the verions object from your `versions.js` file.
+
+`type` is a list by default, but can be configured `accordion` and `table` also.
+
+You can use it as follows:
+
+```
+    {% from "govuk-versioning-plugin/components/version-list/macro.njk" import versionList %}
+
+    {{ versionList({
+        type: 'table',
+        hrefPrefix: '/${phase}/${version}/',
+        versions: versions.versions
+    }) }}
+```
