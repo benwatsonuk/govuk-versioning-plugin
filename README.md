@@ -1,5 +1,5 @@
 # govuk-versioning-plugin
-A plugin for GOVUK Prototype Kit that allows authors to programmitcally create new versions (iterations) within the prototype based upon a specified series of source directories.
+A plugin for GOVUK Prototype Kit that allows authors to programmatically create new versions (iterations) within the prototype based upon a specified series of source directories.
 
 You'll be able to duplicate specified files and directories and update necessary parts of them e.g directory names, file names, variables or strings within the files themselves.
 
@@ -117,6 +117,28 @@ export const config = {
 ```
 
 ## Add the script to execute the plugin
+
+You will need to a script to your project, which you will call in the next steps.
+
+See https://github.com/benwatsonuk/govuk-versioning-plugin/blob/main/test/example-version-plugin.js for the file to copy.
+
+Place this somewhere that suits you, for example `scripts/version-plugin.js` and make sure that you are correctly referencing your `versions.js` file.
+
+Here is what the example file uses:
+
+```
+const versionPlugin = require('@benwatsonuk/govuk-versioning-plugin').default
+const { config, versions } = require('../versions')
+
+async function main () {
+  const tool = versionPlugin(config, versions)
+
+  await tool.run()
+}
+
+main().catch(console.error)
+```
+
 
 ## Add a command to package.json to run the script
 
